@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/telephone-types",
+      "handler": "telephone-type.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/telephone-types/count",
+      "handler": "telephone-type.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/telephone-types/:id",
+      "handler": "telephone-type.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/telephone-types",
+      "handler": "telephone-type.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/telephone-types/:id",
+      "handler": "telephone-type.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/telephone-types/:id",
+      "handler": "telephone-type.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

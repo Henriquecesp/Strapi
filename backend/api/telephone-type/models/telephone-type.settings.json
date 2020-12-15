@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "telephone_types",
+  "info": {
+    "name": "TelephoneType",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "telephones": {
+      "via": "telephone_type_id",
+      "collection": "telephone"
+    }
+  }
+}

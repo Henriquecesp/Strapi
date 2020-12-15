@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/telephones",
+      "handler": "telephone.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/telephones/count",
+      "handler": "telephone.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/telephones/:id",
+      "handler": "telephone.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/telephones",
+      "handler": "telephone.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/telephones/:id",
+      "handler": "telephone.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/telephones/:id",
+      "handler": "telephone.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
