@@ -15,8 +15,8 @@
       "type": "email"
     },
     "contact": {
-      "model": "contact",
-      "via": "emails"
+      "via": "emails",
+      "model": "contact"
     }
   }
 }

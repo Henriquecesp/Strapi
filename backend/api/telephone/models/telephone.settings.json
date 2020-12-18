@@ -15,8 +15,8 @@
       "type": "string"
     },
     "contact": {
-      "model": "contact",
-      "via": "telephones"
+      "via": "telephones",
+      "model": "contact"
     },
     "telephone_type_id": {
       "model": "telephone-type",

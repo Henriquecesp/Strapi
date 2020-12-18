@@ -2,8 +2,8 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/contacts",
-      "handler": "contact.find",
+      "path": "/contacts/me",
+      "handler": "contact.me",
       "config": {
         "policies": []
       }

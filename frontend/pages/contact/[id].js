@@ -8,6 +8,7 @@ const Contact = ({ router }) => {
   const [contactPhones, setContactPhones] = useState([]);
   const [contactEmails, setContactEmails] = useState([]);
   const [telephoneTypes, setTelephoneTypes] = useState([]);
+  const [telephoneTypeId, setTelephoneTypeId] = useState(null);
   const [email, setEmail] = useState("");
   const [telephone, setTelephone] = useState("");
   const jwt = parseCookies().jwt;
@@ -35,6 +36,33 @@ const Contact = ({ router }) => {
       .then((response) => response.json())
       .then((data) => setTelephoneTypes(data));
   }, []);
+
+  const handleChangeOption = (id) => {
+    setTelephoneTypeId(id);
+  };
+
+  const handleSubmitOption = async (e, data) => {
+    e.preventDefault();
+    try {
+      const submit = await fetch("http://localhost:1337/telephone-types", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${jwt}`,
+        },
+        body: JSON.stringify(data),
+      });
+
+      const response = await submit.json();
+
+      setTelephoneTypes((types) => [...types, response]);
+
+      return response;
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
     if (actualContact.emails) {
@@ -64,6 +92,7 @@ const Contact = ({ router }) => {
     });
 
     const response = await submit.json();
+    setTelephoneTypeId(response.id);
 
     setContactEmails((emails) => [...emails, response]);
   }
@@ -75,7 +104,7 @@ const Contact = ({ router }) => {
     const data = {
       telephone,
       contact: Number(router.query.id),
-      telephone_type: 2,
+      telephone_type: Number(telephoneTypeId),
     };
 
     const submit = await fetch("http://localhost:1337/telephones", {
@@ -97,7 +126,7 @@ const Contact = ({ router }) => {
     <div className="w-full max-w-screen-xl mx-auto p-6">
       <div className="relative rounded overflow-hidden border border-grey-light mb-8 bg-white">
         <div className="border-b border-grey-light p-4 bg-grey-lighter py-8">
-          <form className="mx-auto max-w-sm">
+          <div className="mx-auto max-w-sm">
             <h3 className="font-bold leading-tight">{actualContact.name}</h3>
             <br />
             <div className="w-full max-w-lg">
@@ -173,7 +202,11 @@ const Contact = ({ router }) => {
                     type="telephone"
                     onChange={(e) => setTelephone(e.target.value)}
                   />
-                  <Select options={telephoneTypes} />
+                  <Select
+                    options={telephoneTypes}
+                    handleChangeOption={handleChangeOption}
+                    handleSubmitOption={handleSubmitOption}
+                  />
                 </div>
                 <p className="text-gray-600 text-xs italic">
                   You can add many telephone as you want
@@ -223,7 +256,7 @@ const Contact = ({ router }) => {
               </div>
               <div className="md:w-2/3"></div>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>

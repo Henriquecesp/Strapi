@@ -1,9 +1,33 @@
 import { parseCookies } from "nookies";
 import Router from "next/router";
+import { useEffect, useState } from "react";
 
-function ContactsPage({ contacts }) {
+function ContactsPage() {
+  const [contacts, setContacts] = useState([]);
+
+  async function getContact() {
+    const jwt = parseCookies().jwt;
+
+    const res = await fetch(`http://localhost:1337/contacts/me`, {
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    });
+
+    const contacts = await res.json();
+
+    return setContacts(contacts);
+  }
+
+  useEffect(() => {
+    getContact();
+    return () => {
+      getContact();
+    };
+  }, []);
+
   const ContactsSection = () => {
-    if (contacts) {
+    if (contacts && contacts[0] !== undefined) {
       return (
         <>
           {contacts.map((contact) => (
@@ -22,6 +46,8 @@ function ContactsPage({ contacts }) {
           ))}
         </>
       );
+    } else {
+      return "";
     }
   };
 
@@ -57,24 +83,6 @@ function ContactsPage({ contacts }) {
       </div>
     </>
   );
-}
-
-export async function getServerSideProps(ctx) {
-  const jwt = parseCookies(ctx).jwt;
-
-  const res = await fetch("http://localhost:1337/contacts", {
-    headers: {
-      Authorization: `Bearer ${jwt}`,
-    },
-  });
-
-  const contacts = await res.json();
-
-  return {
-    props: {
-      contacts: contacts,
-    },
-  };
 }
 
 export default ContactsPage;

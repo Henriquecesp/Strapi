@@ -60,6 +60,7 @@
       "configurable": false
     },
     "contacts": {
+      "via": "users_permissions_user",
       "collection": "contact"
     }
   }

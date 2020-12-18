@@ -15,12 +15,17 @@
       "type": "string"
     },
     "emails": {
-      "via": "contact",
-      "collection": "email"
+      "collection": "email",
+      "via": "contact"
     },
     "telephones": {
-      "via": "contact",
-      "collection": "telephone"
+      "collection": "telephone",
+      "via": "contact"
+    },
+    "users_permissions_user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "contacts"
     }
   }
 }
